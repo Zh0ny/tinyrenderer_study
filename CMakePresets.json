@@ -1,0 +1,42 @@
+{
+    "version": 8,
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "MSVC_x64",
+            "inherits": "base",
+            "displayName": "MSVC x64",
+            "generator": "Visual Studio 17 2022",
+            "architecture": "x64",
+            "toolset": "host=x86"
+        },
+        {
+            "name": "MinGW_MSYS2",
+            "inherits": "base",
+            "displayName": "GCC 15.2.0 (MSYS2 UCRT64)",
+            "generator": "MinGW Makefiles",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug-msvc",
+            "configurePreset": "MSVC_x64"
+        },
+        {
+            "name": "debug-mingw-msys2",
+            "configurePreset": "MinGW_MSYS2"
+        }
+    ]
+}
