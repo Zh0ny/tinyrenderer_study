@@ -4,8 +4,9 @@
         {
             "name": "base",
             "hidden": true,
-            "binaryDir": "${sourceDir}/build",
+            "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
@@ -18,25 +19,108 @@
             "toolset": "host=x86"
         },
         {
-            "name": "MinGW_MSYS2",
+            "name": "MinGW_MSYS2_DEBUG",
             "inherits": "base",
-            "displayName": "GCC 15.2.0 (MSYS2 UCRT64)",
+            "displayName": "GCC 15.2.0 (MSYS2 UCRT64) DEBUG",
             "generator": "MinGW Makefiles",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/gcc.exe",
                 "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
                 "CMAKE_BUILD_TYPE": "Debug"
             }
+        },
+        {
+            "name": "MinGW_MSYS2_RELEASE",
+            "inherits": "base",
+            "displayName": "GCC 15.2.0 (MSYS2 UCRT64) RELEASE",
+            "generator": "MinGW Makefiles",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "CLANG_MSYS2_DEBUG",
+            "inherits": "base",
+            "displayName": "Clang 21.1.8 x86_64-w64-windows-gnu (clang64) DEBUG",
+            "description": "Using compilers: C = c:\\msys64\\clang64\\bin\\clang.exe, CXX = c:\\msys64\\clang64\\bin\\clang++.exe",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "c:/msys64/clang64/bin/clang.exe",
+                "CMAKE_CXX_COMPILER": "c:/msys64/clang64/bin/clang++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "CLANG_MSYS2_RELEASE",
+            "inherits": "base",
+            "displayName": "Clang 21.1.8 x86_64-w64-windows-gnu (clang64) RELEASE",
+            "description": "Using compilers: C = c:\\msys64\\clang64\\bin\\clang.exe, CXX = c:\\msys64\\clang64\\bin\\clang++.exe",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "c:/msys64/clang64/bin/clang.exe",
+                "CMAKE_CXX_COMPILER": "c:/msys64/clang64/bin/clang++.exe",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "CLANG_LLVM_DEBUG",
+            "inherits": "base",
+            "displayName": "Clang-cl 18.1.8 x86_64-pc-windows-msvc DEBUG",
+            "description": "Using compilers: C = C:\\Program Files\\LLVM\\bin\\clang-cl.exe, CXX = C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_CXX_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "CLANG_LLVM_RELEASE",
+            "inherits": "base",
+            "displayName": "Clang-cl 18.1.8 x86_64-pc-windows-msvc RELEASE",
+            "description": "Using compilers: C = C:\\Program Files\\LLVM\\bin\\clang-cl.exe, CXX = C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_CXX_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
         }
     ],
     "buildPresets": [
         {
+            "name": "release-msvc",
+            "displayName": "MSVC x64 - Release",
+            "configurePreset": "MSVC_x64",
+            "configuration": "Release"
+        },
+        {
             "name": "debug-msvc",
-            "configurePreset": "MSVC_x64"
+            "displayName": "MSVC x64 - Debug",
+            "configurePreset": "MSVC_x64",
+            "configuration": "Debug"
         },
         {
             "name": "debug-mingw-msys2",
-            "configurePreset": "MinGW_MSYS2"
+            "configurePreset": "MinGW_MSYS2_DEBUG"
+        },
+        {
+            "name": "release-mingw-msys2",
+            "configurePreset": "MinGW_MSYS2_RELEASE"
+        },
+        {
+            "name": "debug-clang-msys2",
+            "configurePreset": "CLANG_MSYS2_DEBUG"
+        },
+        {
+            "name": "release-clang-msys2",
+            "configurePreset": "CLANG_MSYS2_RELEASE"
+        },
+        {
+            "name": "debug-clang-llvm",
+            "configurePreset": "CLANG_LLVM_DEBUG"
+        },
+        {
+            "name": "release-clang-llvm",
+            "configurePreset": "CLANG_LLVM_RELEASE"
         }
     ]
 }
